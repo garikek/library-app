@@ -1,0 +1,13 @@
+package com.example.AuthenticationService.dto;
+
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
+@AllArgsConstructor
+public class JWTAuthResponse {
+    private String accessToken;
+    private String refreshToken;
+}
