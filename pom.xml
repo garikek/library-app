@@ -9,11 +9,11 @@
     <packaging>pom</packaging>
     <url>http://maven.apache.org</url>
     <modules>
-        <module>BookService</module>
-        <module>LibraryService</module>
-        <module>EurekaServer</module>
-        <module>APIGateway</module>
-        <module>AuthenticationService</module>
+        <module>book-service</module>
+        <module>library-service</module>
+        <module>eureka-server</module>
+        <module>api-gateway</module>
+        <module>authentication-service</module>
     </modules>
 
     <build>
