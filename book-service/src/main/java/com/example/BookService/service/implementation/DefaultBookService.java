@@ -49,9 +49,9 @@ public class DefaultBookService implements BookService {
 
     @Override
     public BookDTO getBookByIsbn(String isbn) throws BookNotFoundException {
-        Book opt_book = bookRepository.findByIsbn(isbn)
+        Book optBook = bookRepository.findByIsbn(isbn)
                 .orElseThrow(() -> new BookNotFoundException(String.format(BOOK_NOT_FOUND_BY_ISBN, isbn)));
-        return modelMapper.map(opt_book, BookDTO.class);
+        return modelMapper.map(optBook, BookDTO.class);
     }
 
     @Override
@@ -71,15 +71,15 @@ public class DefaultBookService implements BookService {
 
     @Override
     public BookDTO updateBook(Long id, BookDTO book) throws BookNotFoundException {
-        Book opt_book = bookRepository.findById(id)
+        Book optBook = bookRepository.findById(id)
                 .orElseThrow(() -> new BookNotFoundException(String.format(BOOK_NOT_FOUND_BY_ID, id)));
-        opt_book.setAuthor(book.getAuthor());
-        opt_book.setTitle(book.getTitle());
-        opt_book.setGenre(book.getGenre());
-        opt_book.setIsbn(book.getIsbn());
-        opt_book.setDescription(book.getDescription());
-        bookRepository.save(opt_book);
-        return modelMapper.map(opt_book, BookDTO.class);
+        optBook.setAuthor(book.getAuthor());
+        optBook.setTitle(book.getTitle());
+        optBook.setGenre(book.getGenre());
+        optBook.setIsbn(book.getIsbn());
+        optBook.setDescription(book.getDescription());
+        bookRepository.save(optBook);
+        return modelMapper.map(optBook, BookDTO.class);
     }
 
 }
