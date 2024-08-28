@@ -9,9 +9,9 @@
 		<relativePath/>
 	</parent>
 	<groupId>com.example</groupId>
-	<artifactId>AuthenticationService</artifactId>
+	<artifactId>authentication-service</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>AuthenticationService</name>
+	<name>authentication-service</name>
 	<description>Authentication service for modsen internship task</description>
 	<url/>
 	<licenses>

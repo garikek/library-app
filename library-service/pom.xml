@@ -9,9 +9,9 @@
 		<relativePath/>
 	</parent>
 	<groupId>com.example</groupId>
-	<artifactId>LibraryService</artifactId>
+	<artifactId>library-service</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>LibraryService</name>
+	<name>library-service</name>
 	<description>Library service for internship task</description>
 	<url/>
 	<licenses>

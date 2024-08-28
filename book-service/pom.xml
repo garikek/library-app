@@ -9,9 +9,9 @@
 		<relativePath/>
 	</parent>
 	<groupId>com.example</groupId>
-	<artifactId>BookService</artifactId>
+	<artifactId>book-service</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>BookService</name>
+	<name>book-service</name>
 	<description>Practice task</description>
 	<properties>
 		<java.version>21</java.version>

@@ -9,10 +9,10 @@
 		<relativePath/>
 	</parent>
 	<groupId>com.example</groupId>
-	<artifactId>APIGateway</artifactId>
+	<artifactId>eureka-server</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>APIGateway</name>
-	<description>API Gateway for request handling</description>
+	<name>eureka-server</name>
+	<description>Eureka server for microservices discovery in modsen internship task</description>
 	<url/>
 	<licenses>
 		<license/>
@@ -29,36 +29,22 @@
 	<properties>
 		<java.version>21</java.version>
 		<spring-cloud.version>2023.0.3</spring-cloud.version>
-		<spring-cloud-gateway.version>4.1.2</spring-cloud-gateway.version>
-		<spring-cloud-config.version>4.1.1</spring-cloud-config.version>
-		<spring-cloud-eureka.version>4.1.0</spring-cloud-eureka.version>
-		<spring-cloud-bootstrap.version>4.0.0</spring-cloud-bootstrap.version>
+		<spring-cloud-starter-bootstrap.version>4.0.0</spring-cloud-starter-bootstrap.version>
 	</properties>
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
-			<artifactId>spring-cloud-starter-gateway</artifactId>
-			<version>${spring-cloud-gateway.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.cloud</groupId>
-			<artifactId>spring-cloud-starter-config</artifactId>
-			<version>${spring-cloud-config.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.cloud</groupId>
-			<artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
-			<version>${spring-cloud-eureka.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.cloud</groupId>
-			<artifactId>spring-cloud-starter-bootstrap</artifactId>
-			<version>${spring-cloud-bootstrap.version}</version>
+			<artifactId>spring-cloud-starter-netflix-eureka-server</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-bootstrap</artifactId>
+			<version>${spring-cloud-starter-bootstrap.version}</version>
 		</dependency>
 	</dependencies>
 	<dependencyManagement>
