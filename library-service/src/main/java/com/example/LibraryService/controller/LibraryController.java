@@ -11,7 +11,7 @@ import org.springframework.http.HttpStatus;
 
 @RequiredArgsConstructor
 @RestController
-@RequestMapping("/library")
+@RequestMapping("/api/v1/library")
 public class LibraryController {
     private final DefaultLibraryService libraryService;
 

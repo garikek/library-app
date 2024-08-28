@@ -9,17 +9,17 @@ spring:
           lower-case-service-id: true
       routes:
         - id: Books
-          uri: lb://BookService
+          uri: lb://book-service
           predicates:
-            - Path=/books/**
+            - Path=/api/v1/books/**
         - id: Library
-          uri: lb://LibraryService
+          uri: lb://library-service
           predicates:
-            - Path=/library/**
+            - Path=/api/v1/library/**
         - id: Authentication
-          uri: lb://AuthenticationService
+          uri: lb://authentication-service
           predicates:
-            - Path=/auth/**
+            - Path=/api/v1/auth/**
 eureka:
   instance:
     prefer-ip-address: true
