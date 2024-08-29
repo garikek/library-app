@@ -16,8 +16,8 @@ public class BookController {
     private final DefaultBookService bookService;
 
     @GetMapping
-    public ResponseEntity<BookListDTO> getBooks() {
-        return ResponseEntity.ok().body(bookService.getBooks());
+    public BookListDTO getBooks() {
+        return bookService.getBooks();
     }
 
     @ResponseStatus(HttpStatus.CREATED)
@@ -27,13 +27,13 @@ public class BookController {
     }
 
     @GetMapping("/isbn/{isbn}")
-    public ResponseEntity<BookDTO> getBookByIsbn(@PathVariable String isbn) throws BookNotFoundException {
-        return ResponseEntity.ok().body(bookService.getBookByIsbn(isbn));
+    public BookDTO getBookByIsbn(@PathVariable String isbn) throws BookNotFoundException {
+        return bookService.getBookByIsbn(isbn);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<BookDTO> getAllBookByIsbn(@PathVariable Long id) throws BookNotFoundException {
-        return ResponseEntity.ok().body(bookService.getBookById(id));
+    public BookDTO getAllBookByIsbn(@PathVariable Long id) throws BookNotFoundException {
+        return bookService.getBookById(id);
     }
 
     @ResponseStatus(HttpStatus.NO_CONTENT)

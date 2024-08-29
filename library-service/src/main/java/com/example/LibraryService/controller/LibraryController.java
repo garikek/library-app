@@ -16,8 +16,8 @@ public class LibraryController {
     private final DefaultLibraryService libraryService;
 
     @GetMapping("/free")
-    public ResponseEntity<LibraryListDTO> getFreeBooks() {
-        return ResponseEntity.ok().body(libraryService.getFreeBooks());
+    public LibraryListDTO getFreeBooks() {
+        return libraryService.getFreeBooks();
     }
 
     @ResponseStatus(HttpStatus.CREATED)
