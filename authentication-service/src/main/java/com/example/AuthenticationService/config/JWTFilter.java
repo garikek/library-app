@@ -30,7 +30,7 @@ public class JWTFilter extends GenericFilterBean {
         String requestPath = httpRequest.getRequestURI();
 
         // Пропускаем фильтр для публичных маршрутов
-        if (requestPath.equals("/auth/login") || requestPath.equals("/auth/signup")) {
+        if (requestPath.equals("/api/v1/auth/login") || requestPath.equals("/api/v1/auth/signup")) {
             fc.doFilter(request, response);
             return;
         }
