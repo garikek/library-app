@@ -12,10 +12,14 @@ spring:
           uri: lb://book-service
           predicates:
             - Path=/api/v1/books/**
+          filters:
+            - AddRequestHeader=Authorization, $request.header.Authorization
         - id: Library
           uri: lb://library-service
           predicates:
             - Path=/api/v1/library/**
+          filters:
+            - AddRequestHeader=Authorization, $request.header.Authorization
         - id: Authentication
           uri: lb://authentication-service
           predicates:
