@@ -10,6 +10,8 @@ import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 import lombok.RequiredArgsConstructor;
 
+import java.time.LocalDate;
+import java.util.List;
 import java.util.stream.Collectors;
 
 import static com.example.LibraryService.utility.Constant.LIBRARY_NOT_FOUND_BY_ID;
@@ -20,12 +22,12 @@ public class DefaultLibraryService implements LibraryService {
     private final LibraryRepository libraryRepository;
     private final ModelMapper modelMapper;
 
-
-
     public LibraryListDTO getFreeBooks() {
-        return new LibraryListDTO(libraryRepository.findByDateBorrowedIsNull().
-                stream().map((book) -> modelMapper.map(book, LibraryDTO.class)).
-                collect(Collectors.toList()));
+        LocalDate today = LocalDate.now();
+        List<Library> freeBooks = libraryRepository.findByDateToReturnBefore(today);
+        return new LibraryListDTO(freeBooks.stream()
+                .map(book -> modelMapper.map(book, LibraryDTO.class))
+                .collect(Collectors.toList()));
     }
 
     @Override
