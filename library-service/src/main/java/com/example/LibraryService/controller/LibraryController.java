@@ -11,6 +11,9 @@ import org.springframework.http.HttpStatus;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+
+import java.net.URI;
 
 @RequiredArgsConstructor
 @RestController
@@ -35,7 +38,13 @@ public class LibraryController {
     @Operation(summary = "Add a new book", description = "Add a new book to the library")
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
-    public void addBookToLibrary(@RequestBody LibraryDTO libraryDTO) {
-        libraryService.addBook(libraryDTO);
+    public ResponseEntity<LibraryDTO> addBookToLibrary(@RequestBody LibraryDTO libraryDTO) {
+        LibraryDTO createdLibraryDTO = libraryService.addBook(libraryDTO);
+        URI location = ServletUriComponentsBuilder
+                .fromCurrentRequest()
+                .path("/{id}")
+                .buildAndExpand(createdLibraryDTO.getId())
+                .toUri();
+        return ResponseEntity.created(location).body(createdLibraryDTO);
     }
 }
