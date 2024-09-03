@@ -36,7 +36,7 @@ public class DefaultLibraryService implements LibraryService {
                 .orElseThrow(() -> new LibraryNotFoundException(String.format(LIBRARY_NOT_FOUND_BY_ID, id)));
         library.setBookId(libraryDTO.getBookId());
         library.setDateBorrowed(libraryDTO.getDateBorrowed());
-        library.setDateToReturn(libraryDTO.getDateBorrowed());
+        library.setDateToReturn(libraryDTO.getDateToReturn());
         libraryRepository.save(library);
         return modelMapper.map(library, LibraryDTO.class);
     }
