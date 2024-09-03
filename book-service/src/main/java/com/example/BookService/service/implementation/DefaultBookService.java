@@ -2,22 +2,25 @@ package com.example.BookService.service.implementation;
 
 import com.example.BookService.dto.BookDTO;
 import com.example.BookService.dto.BookListDTO;
-import com.example.BookService.dto.LibraryRequest;
+import com.example.BookService.dto.LibraryDTO;
 import com.example.BookService.model.Book;
 import com.example.BookService.repository.BookRepository;
 import com.example.BookService.service.BookService;
 import com.example.BookService.exception.BookNotFoundException;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
-import org.springframework.beans.factory.annotation.Value;
 
+import java.net.URI;
+import java.time.LocalDate;
 import java.util.stream.Collectors;
 
 import static com.example.BookService.utility.Constant.BOOK_NOT_FOUND_BY_ID;
 import static com.example.BookService.utility.Constant.BOOK_NOT_FOUND_BY_ISBN;
 
+@Slf4j
 @RequiredArgsConstructor
 @Service
 public class DefaultBookService implements BookService {
@@ -34,16 +37,24 @@ public class DefaultBookService implements BookService {
 
     @Override
     public BookDTO addBook(BookDTO bookDTO) {
+        log.info("Starting the process of adding a new book: {}", bookDTO);
+
         Book book = modelMapper.map(bookDTO, Book.class);
         Book savedBook = bookRepository.save(book);
 
-//        LibraryRequest libraryRequest = new LibraryRequest();
-//        libraryRequest.setBookId(savedBook.getId());
-//        libraryRequest.setDateBorrowed(null);
-//        libraryRequest.setDateToReturn(null);
-//
-//        String libraryServiceUrl = "http://localhost:8083";
-//        restTemplate.postForEntity(libraryServiceUrl + "/library", libraryRequest, String.class);
+        log.info("Book saved in the database with ID: {}", savedBook.getId());
+
+        LibraryDTO libraryDTO = new LibraryDTO();
+        libraryDTO.setBookId(savedBook.getId());
+        libraryDTO.setDateBorrowed(LocalDate.now());
+        libraryDTO.setDateToReturn(LocalDate.now().plusDays(14));
+
+        try {
+            URI location = restTemplate.postForLocation("http://library-service/api/v1/library", libraryDTO);
+            log.info("Book successfully sent to LibraryService, location: {}", location);
+        } catch (Exception e) {
+            log.error("Failed to send book to LibraryService. Error: {}", e.getMessage());
+        }
 
         return modelMapper.map(savedBook, BookDTO.class);
     }

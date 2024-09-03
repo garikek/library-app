@@ -4,12 +4,16 @@ import com.example.LibraryService.dto.LibraryDTO;
 import com.example.LibraryService.dto.LibraryListDTO;
 import com.example.LibraryService.exception.LibraryNotFoundException;
 import com.example.LibraryService.service.implementation.DefaultLibraryService;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+
+import java.net.URI;
 
 @RequiredArgsConstructor
 @RestController
@@ -25,17 +29,22 @@ public class LibraryController {
     }
 
     @Operation(summary = "Update a book", description = "Update the details of an existing book in the library")
-    @ResponseStatus(HttpStatus.CREATED)
-    @PostMapping("/{id}")
-    public void updateBook(@PathVariable Long id, @RequestBody LibraryDTO libraryDTO) throws LibraryNotFoundException {
-        libraryService.updateBook(id, libraryDTO);
+    @PutMapping("/{id}")
+    public ResponseEntity<LibraryDTO> updateBook(@PathVariable Long id, @RequestBody LibraryDTO libraryDTO) throws LibraryNotFoundException {
+        LibraryDTO updatedLibraryDTO = libraryService.updateBook(id, libraryDTO);
+        return ResponseEntity.ok().body(updatedLibraryDTO);
     }
 
-//    for handling new book additions
     @Operation(summary = "Add a new book", description = "Add a new book to the library")
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
-    public void addBookToLibrary(@RequestBody LibraryDTO libraryDTO) {
-        libraryService.addBook(libraryDTO);
+    public ResponseEntity<LibraryDTO> addBookToLibrary(@RequestBody LibraryDTO libraryDTO) {
+        LibraryDTO createdLibraryDTO = libraryService.addBook(libraryDTO);
+        URI location = ServletUriComponentsBuilder
+                .fromCurrentRequest()
+                .path("/{id}")
+                .buildAndExpand(createdLibraryDTO.getId())
+                .toUri();
+        return ResponseEntity.created(location).body(createdLibraryDTO);
     }
 }

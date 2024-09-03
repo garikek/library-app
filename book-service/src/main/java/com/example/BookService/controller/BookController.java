@@ -13,6 +13,9 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+
+import java.net.URI;
 
 @RequiredArgsConstructor
 @RestController
@@ -30,8 +33,14 @@ public class BookController {
     @Operation(summary = "Add a new book", description = "Add a new book to the database")
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
-    public void addBook(@RequestBody BookDTO bookDTO) {
-        bookService.addBook(bookDTO);
+    public ResponseEntity<BookDTO> addBook(@RequestBody BookDTO bookDTO) {
+        BookDTO createdBookDTO = bookService.addBook(bookDTO);
+        URI location = ServletUriComponentsBuilder
+                .fromCurrentRequest()
+                .path("/{id}")
+                .buildAndExpand(createdBookDTO.getId())
+                .toUri();
+        return ResponseEntity.created(location).body(createdBookDTO);
     }
 
     @Operation(summary = "Get a book by ISBN", description = "Retrieve a book using its ISBN")
