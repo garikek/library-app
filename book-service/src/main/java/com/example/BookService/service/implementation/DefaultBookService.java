@@ -4,10 +4,12 @@ import com.example.BookService.dto.BookDTO;
 import com.example.BookService.dto.BookListDTO;
 import com.example.BookService.dto.LibraryDTO;
 import com.example.BookService.exception.DuplicateIsbnException;
+import com.example.BookService.exception.InvalidIsbnException;
 import com.example.BookService.model.Book;
 import com.example.BookService.repository.BookRepository;
 import com.example.BookService.service.BookService;
 import com.example.BookService.exception.BookNotFoundException;
+import com.example.BookService.utility.IsbnValidator;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
@@ -38,10 +40,15 @@ public class DefaultBookService implements BookService {
     }
 
     @Override
-    public BookDTO addBook(BookDTO bookDTO) {
+    public BookDTO addBook(BookDTO bookDTO) throws InvalidIsbnException {
         log.info("Starting the process of adding a new book: {}", bookDTO);
 
         Book book = modelMapper.map(bookDTO, Book.class);
+
+        if (!IsbnValidator.isValidIsbn((book.getIsbn()))) {
+            throw new InvalidIsbnException(String.format("Invalid ISBN: %s", book.getIsbn()));
+        }
+
         Book savedBook = bookRepository.save(book);
 
         log.info("Book saved in the database with ID: {}", savedBook.getId());
@@ -84,9 +91,13 @@ public class DefaultBookService implements BookService {
     }
 
     @Override
-    public BookDTO updateBook(Long id, BookDTO book) throws BookNotFoundException, DuplicateIsbnException {
+    public BookDTO updateBook(Long id, BookDTO book) throws BookNotFoundException, DuplicateIsbnException, InvalidIsbnException {
         Book optBook = bookRepository.findById(id)
                 .orElseThrow(() -> new BookNotFoundException(String.format(BOOK_NOT_FOUND_BY_ID, id)));
+
+        if (!IsbnValidator.isValidIsbn((book.getIsbn()))) {
+            throw new InvalidIsbnException(String.format("Invalid ISBN: %s", book.getIsbn()));
+        }
 
         Optional<Book> bookWithSameIsbn = bookRepository.findByIsbn(book.getIsbn());
         if (bookWithSameIsbn.isPresent() && !bookWithSameIsbn.get().getId().equals(id)) {

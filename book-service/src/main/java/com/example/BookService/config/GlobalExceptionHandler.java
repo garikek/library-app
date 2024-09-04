@@ -2,6 +2,7 @@ package com.example.BookService.config;
 
 import com.example.BookService.exception.BookNotFoundException;
 import com.example.BookService.exception.DuplicateIsbnException;
+import com.example.BookService.exception.InvalidIsbnException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -20,6 +21,11 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     @ExceptionHandler(DuplicateIsbnException.class)
     public ResponseEntity<String> handleDuplicateIsbnException(DuplicateIsbnException e) {
         return ResponseEntity.status(HttpStatus.CONFLICT).body(e.getMessage());
+    }
+
+    @ExceptionHandler(InvalidIsbnException.class)
+    public ResponseEntity<String> handleInvalidIsbnException(InvalidIsbnException e) {
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
     }
 
     @ExceptionHandler(Exception.class)
