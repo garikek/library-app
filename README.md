@@ -43,7 +43,7 @@ CREATE TABLE `user` (
 mvn clean install
 ```
 
-## 3a) Запуск вручную
+## 3a. Запуск вручную
 
 Запустить модули в порядке
 
@@ -53,8 +53,14 @@ mvn clean install
 4) library-service
 5) api-gateway
 
-## 3b) Запуск через docker
+## 3b. Запуск через docker
 
 ```shell
 docker-compose up
 ```
+
+# Swagger
+
+* [authentication-service](http://localhost:8081/swagger-ui/index.html#/Library)
+* [book-service](http://localhost:8082/swagger-ui/index.html#/Library)
+* [library-service](http://localhost:8083/swagger-ui/index.html#/Library)
