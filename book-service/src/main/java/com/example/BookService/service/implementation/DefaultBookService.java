@@ -3,6 +3,7 @@ package com.example.BookService.service.implementation;
 import com.example.BookService.dto.BookDTO;
 import com.example.BookService.dto.BookListDTO;
 import com.example.BookService.dto.LibraryDTO;
+import com.example.BookService.exception.DuplicateIsbnException;
 import com.example.BookService.model.Book;
 import com.example.BookService.repository.BookRepository;
 import com.example.BookService.service.BookService;
@@ -15,6 +16,7 @@ import org.springframework.web.client.RestTemplate;
 
 import java.net.URI;
 import java.time.LocalDate;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import static com.example.BookService.utility.Constant.BOOK_NOT_FOUND_BY_ID;
@@ -82,9 +84,15 @@ public class DefaultBookService implements BookService {
     }
 
     @Override
-    public BookDTO updateBook(Long id, BookDTO book) throws BookNotFoundException {
+    public BookDTO updateBook(Long id, BookDTO book) throws BookNotFoundException, DuplicateIsbnException {
         Book optBook = bookRepository.findById(id)
                 .orElseThrow(() -> new BookNotFoundException(String.format(BOOK_NOT_FOUND_BY_ID, id)));
+
+        Optional<Book> bookWithSameIsbn = bookRepository.findByIsbn(book.getIsbn());
+        if (bookWithSameIsbn.isPresent() && !bookWithSameIsbn.get().getId().equals(id)) {
+            throw new DuplicateIsbnException(String.format("ISBN %s exists already.", book.getIsbn()));
+        }
+
         optBook.setAuthor(book.getAuthor());
         optBook.setTitle(book.getTitle());
         optBook.setGenre(book.getGenre());
