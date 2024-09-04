@@ -43,10 +43,18 @@ CREATE TABLE `user` (
 mvn clean install
 ```
 
-## 3. Запуск модулей в порядке
+## 3a) Запуск вручную
 
-1) EurekaServer
-2) AuthenticationService
-3) BookService
-4) LibraryService
-5) APIGateway
+Запустить модули в порядке
+
+1) eureka-server
+2) authentication-service
+3) book-service
+4) library-service
+5) api-gateway
+
+## 3b) Запуск через docker
+
+```shell
+docker-compose up
+```
