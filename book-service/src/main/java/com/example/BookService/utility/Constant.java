@@ -1,4 +1,4 @@
-package com.example.BookService.utility;
+package com.example.bookservice.utility;
 
 public class Constant {
     public static final String BOOK_NOT_FOUND_BY_ID = "Book not found by ID - %s";

@@ -1,4 +1,4 @@
-package com.example.BookService.authorization;
+package com.example.bookservice.authorization;
 
 public class JWTConstant {
     public static final String SECRET = "qBTmv4oXFFR2GwjexDJ4t6fsIUIUhhXqlktXjXdkcyygs8nPVEwMfo29VDRRepYDVV5IkIxBMzr7OEHXEHd37w==";

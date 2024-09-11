@@ -1,4 +1,4 @@
-package com.example.BookService.model;
+package com.example.bookservice.model;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

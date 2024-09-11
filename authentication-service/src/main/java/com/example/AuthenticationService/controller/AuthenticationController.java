@@ -1,11 +1,11 @@
-package com.example.AuthenticationService.controller;
+package com.example.authenticationservice.controller;
 
-import com.example.AuthenticationService.dto.JWTAuthRequest;
-import com.example.AuthenticationService.dto.JWTAuthResponse;
-import com.example.AuthenticationService.dto.UserDTO;
-import com.example.AuthenticationService.exception.UserNotFoundException;
-import com.example.AuthenticationService.exception.WrongPasswordException;
-import com.example.AuthenticationService.service.implementation.DefaultAuthenticationService;
+import com.example.authenticationservice.dto.JWTAuthRequest;
+import com.example.authenticationservice.dto.JWTAuthResponse;
+import com.example.authenticationservice.dto.UserDTO;
+import com.example.authenticationservice.exception.UserNotFoundException;
+import com.example.authenticationservice.exception.WrongPasswordException;
+import com.example.authenticationservice.service.implementation.DefaultAuthenticationService;
 import jakarta.security.auth.message.AuthException;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;

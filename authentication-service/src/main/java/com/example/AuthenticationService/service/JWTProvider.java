@@ -1,6 +1,6 @@
-package com.example.AuthenticationService.service;
+package com.example.authenticationservice.service;
 
-import com.example.AuthenticationService.model.UserCredential;
+import com.example.authenticationservice.model.UserCredential;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.io.Decoders;
@@ -13,8 +13,8 @@ import javax.crypto.SecretKey;
 import java.security.Key;
 import java.util.Date;
 
-import static com.example.AuthenticationService.utility.JWTConstant.EXPIRATION_TIME;
-import static com.example.AuthenticationService.utility.JWTConstant.SECRET;
+import static com.example.authenticationservice.utility.JWTConstant.EXPIRATION_TIME;
+import static com.example.authenticationservice.utility.JWTConstant.SECRET;
 
 @Slf4j
 @Component

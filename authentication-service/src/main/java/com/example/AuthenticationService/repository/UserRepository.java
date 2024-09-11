@@ -1,6 +1,6 @@
-package com.example.AuthenticationService.repository;
+package com.example.authenticationservice.repository;
 
-import com.example.AuthenticationService.model.UserCredential;
+import com.example.authenticationservice.model.UserCredential;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;

@@ -1,4 +1,4 @@
-package com.example.BookService.config;
+package com.example.bookservice.config;
 
 import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.context.annotation.Bean;

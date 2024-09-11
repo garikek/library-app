@@ -1,14 +1,14 @@
-package com.example.AuthenticationService.service.implementation;
+package com.example.authenticationservice.service.implementation;
 
-import com.example.AuthenticationService.dto.JWTAuthRequest;
-import com.example.AuthenticationService.dto.JWTAuthResponse;
-import com.example.AuthenticationService.dto.UserDTO;
-import com.example.AuthenticationService.exception.UserNotFoundException;
-import com.example.AuthenticationService.exception.WrongPasswordException;
-import com.example.AuthenticationService.model.UserCredential;
-import com.example.AuthenticationService.repository.UserRepository;
-import com.example.AuthenticationService.service.AuthenticationService;
-import com.example.AuthenticationService.service.JWTProvider;
+import com.example.authenticationservice.dto.JWTAuthRequest;
+import com.example.authenticationservice.dto.JWTAuthResponse;
+import com.example.authenticationservice.dto.UserDTO;
+import com.example.authenticationservice.exception.UserNotFoundException;
+import com.example.authenticationservice.exception.WrongPasswordException;
+import com.example.authenticationservice.model.UserCredential;
+import com.example.authenticationservice.repository.UserRepository;
+import com.example.authenticationservice.service.AuthenticationService;
+import com.example.authenticationservice.service.JWTProvider;
 import jakarta.security.auth.message.AuthException;
 import lombok.AllArgsConstructor;
 import lombok.NonNull;

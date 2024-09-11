@@ -1,8 +1,8 @@
-package com.example.BookService.service;
+package com.example.bookservice.service;
 
-import com.example.BookService.dto.BookDTO;
-import com.example.BookService.dto.BookListDTO;
-import com.example.BookService.exception.BookNotFoundException;
+import com.example.bookservice.dto.BookDTO;
+import com.example.bookservice.dto.BookListDTO;
+import com.example.bookservice.exception.BookNotFoundException;
 
 public interface BookService {
     BookListDTO getBooks();

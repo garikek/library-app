@@ -1,6 +1,6 @@
-package com.example.LibraryService.config;
+package com.example.libraryservice.config;
 
-import com.example.LibraryService.authorization.JWTFilter;
+import com.example.libraryservice.authorization.JWTFilter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

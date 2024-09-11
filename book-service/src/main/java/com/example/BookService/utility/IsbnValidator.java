@@ -1,4 +1,4 @@
-package com.example.BookService.utility;
+package com.example.bookservice.utility;
 
 import lombok.NoArgsConstructor;
 

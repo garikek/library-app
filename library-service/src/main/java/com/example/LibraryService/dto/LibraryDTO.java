@@ -1,4 +1,4 @@
-package com.example.LibraryService.dto;
+package com.example.libraryservice.dto;
 
 import lombok.Getter;
 import lombok.Setter;

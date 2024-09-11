@@ -1,4 +1,4 @@
-package com.example.LibraryService.model;
+package com.example.libraryservice.model;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

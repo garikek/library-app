@@ -1,4 +1,4 @@
-package com.example.LibraryService.dto;
+package com.example.libraryservice.dto;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.context.annotation.Bean;

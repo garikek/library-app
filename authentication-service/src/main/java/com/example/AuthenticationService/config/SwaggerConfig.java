@@ -1,4 +1,4 @@
-package com.example.AuthenticationService.config;
+package com.example.authenticationservice.config;
 
 import org.springdoc.core.models.GroupedOpenApi;
 import org.springframework.context.annotation.Bean;

@@ -1,4 +1,4 @@
-package com.example.AuthenticationService.dto;
+package com.example.authenticationservice.dto;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.context.annotation.Bean;

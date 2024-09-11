@@ -1,4 +1,4 @@
-package com.example.LibraryService.authorization;
+package com.example.libraryservice.authorization;
 
 import io.jsonwebtoken.Claims;
 import jakarta.servlet.ServletRequest;
