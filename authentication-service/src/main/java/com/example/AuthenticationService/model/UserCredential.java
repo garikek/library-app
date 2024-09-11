@@ -28,7 +28,7 @@ public class UserCredential {
     private String email;
     @Column(name = "password")
     private String password;
-    @Column(name = "userName")
+    @Column(name = "user_name")
     private String userName;
 
     @Override
