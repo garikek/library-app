@@ -1,4 +1,4 @@
-package com.example.LibraryService.authorization;
+package com.example.libraryservice.authorization;
 
 public class JWTConstant {
     public static final String SECRET = "qBTmv4oXFFR2GwjexDJ4t6fsIUIUhhXqlktXjXdkcyygs8nPVEwMfo29VDRRepYDVV5IkIxBMzr7OEHXEHd37w==";

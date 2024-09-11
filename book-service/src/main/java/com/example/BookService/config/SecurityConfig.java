@@ -1,6 +1,6 @@
-package com.example.BookService.config;
+package com.example.bookservice.config;
 
-import com.example.BookService.authorization.JWTFilter;
+import com.example.bookservice.authorization.JWTFilter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

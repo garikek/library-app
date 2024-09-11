@@ -1,8 +1,8 @@
-package com.example.LibraryService.service;
+package com.example.libraryservice.service;
 
-import com.example.LibraryService.dto.LibraryDTO;
-import com.example.LibraryService.dto.LibraryListDTO;
-import com.example.LibraryService.exception.LibraryNotFoundException;
+import com.example.libraryservice.dto.LibraryDTO;
+import com.example.libraryservice.dto.LibraryListDTO;
+import com.example.libraryservice.exception.LibraryNotFoundException;
 
 public interface LibraryService {
     LibraryListDTO getFreeBooks();

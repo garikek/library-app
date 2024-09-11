@@ -1,9 +1,9 @@
-package com.example.LibraryService.controller;
+package com.example.libraryservice.controller;
 
-import com.example.LibraryService.dto.LibraryDTO;
-import com.example.LibraryService.dto.LibraryListDTO;
-import com.example.LibraryService.exception.LibraryNotFoundException;
-import com.example.LibraryService.service.implementation.DefaultLibraryService;
+import com.example.libraryservice.dto.LibraryDTO;
+import com.example.libraryservice.dto.LibraryListDTO;
+import com.example.libraryservice.exception.LibraryNotFoundException;
+import com.example.libraryservice.service.implementation.DefaultLibraryService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import lombok.RequiredArgsConstructor;

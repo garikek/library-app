@@ -1,6 +1,6 @@
-package com.example.AuthenticationService.config;
+package com.example.authenticationservice.config;
 
-import com.example.AuthenticationService.service.JWTProvider;
+import com.example.authenticationservice.service.JWTProvider;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.io.IOException;
 import jakarta.servlet.FilterChain;

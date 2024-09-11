@@ -1,15 +1,15 @@
-package com.example.BookService.service.implementation;
+package com.example.bookservice.service.implementation;
 
-import com.example.BookService.dto.BookDTO;
-import com.example.BookService.dto.BookListDTO;
-import com.example.BookService.dto.LibraryDTO;
-import com.example.BookService.exception.DuplicateIsbnException;
-import com.example.BookService.exception.InvalidIsbnException;
-import com.example.BookService.model.Book;
-import com.example.BookService.repository.BookRepository;
-import com.example.BookService.service.BookService;
-import com.example.BookService.exception.BookNotFoundException;
-import com.example.BookService.utility.IsbnValidator;
+import com.example.bookservice.dto.BookDTO;
+import com.example.bookservice.dto.BookListDTO;
+import com.example.bookservice.dto.LibraryDTO;
+import com.example.bookservice.exception.DuplicateIsbnException;
+import com.example.bookservice.exception.InvalidIsbnException;
+import com.example.bookservice.model.Book;
+import com.example.bookservice.repository.BookRepository;
+import com.example.bookservice.service.BookService;
+import com.example.bookservice.exception.BookNotFoundException;
+import com.example.bookservice.utility.IsbnValidator;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
@@ -21,8 +21,8 @@ import java.time.LocalDate;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-import static com.example.BookService.utility.Constant.BOOK_NOT_FOUND_BY_ID;
-import static com.example.BookService.utility.Constant.BOOK_NOT_FOUND_BY_ISBN;
+import static com.example.bookservice.utility.Constant.BOOK_NOT_FOUND_BY_ID;
+import static com.example.bookservice.utility.Constant.BOOK_NOT_FOUND_BY_ISBN;
 
 @Slf4j
 @RequiredArgsConstructor

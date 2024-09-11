@@ -19,7 +19,10 @@ x-config-microsrvice:
 
 services:
   eureka-server:
-    image: garikek/eureka-server:latest
+    build:
+      context: ./eureka-server
+      dockerfile: ./Dockerfile
+    image: eureka-server
     ports:
       - 8761:8761
     <<: *spring-config
@@ -27,7 +30,10 @@ services:
     networks:
       - app
   api-gateway:
-    image: garikek/api-gateway:latest
+    build:
+      context: ./api-gateway
+      dockerfile: ./Dockerfile
+    image: api-gateway
     ports:
       - 8080:8080
     <<: *spring-config
@@ -50,7 +56,10 @@ services:
     networks:
       - app
   authentication-service:
-    image: garikek/authentication-service:latest
+    build:
+      context: ./authentication-service
+      dockerfile: ./Dockerfile
+    image: authentication-service
     ports:
       - 8081:8081
     depends_on:
@@ -61,7 +70,10 @@ services:
     networks:
       - app
   book-service:
-    image: garikek/book-service:latest
+    build:
+      context: ./book-service
+      dockerfile: ./Dockerfile
+    image: book-service
     ports:
       - 8082:8082
     depends_on:
@@ -73,7 +85,10 @@ services:
     networks:
       - app
   library-service:
-    image: garikek/library-service:latest
+    build:
+      context: ./library-service
+      dockerfile: ./Dockerfile
+    image: library-service
     ports:
       - 8083:8083
     depends_on:

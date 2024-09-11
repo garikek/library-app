@@ -1,9 +1,9 @@
-package com.example.BookService.controller;
+package com.example.bookservice.controller;
 
-import com.example.BookService.dto.BookDTO;
-import com.example.BookService.dto.BookListDTO;
-import com.example.BookService.exception.BookNotFoundException;
-import com.example.BookService.service.implementation.DefaultBookService;
+import com.example.bookservice.dto.BookDTO;
+import com.example.bookservice.dto.BookListDTO;
+import com.example.bookservice.exception.BookNotFoundException;
+import com.example.bookservice.service.implementation.DefaultBookService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -59,7 +59,7 @@ public class BookController {
             @ApiResponse(responseCode = "404", description = "Book not found")
     })
     @GetMapping("/{id}")
-    public BookDTO getAllBookByIsbn(@PathVariable Long id) throws BookNotFoundException {
+    public BookDTO getBookById(@PathVariable Long id) throws BookNotFoundException {
         return bookService.getBookById(id);
     }
 

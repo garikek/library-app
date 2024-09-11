@@ -1,4 +1,4 @@
-package com.example.BookService.authorization;
+package com.example.bookservice.authorization;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;

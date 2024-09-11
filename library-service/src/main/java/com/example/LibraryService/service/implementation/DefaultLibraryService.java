@@ -1,11 +1,11 @@
-package com.example.LibraryService.service.implementation;
+package com.example.libraryservice.service.implementation;
 
-import com.example.LibraryService.dto.LibraryDTO;
-import com.example.LibraryService.dto.LibraryListDTO;
-import com.example.LibraryService.exception.LibraryNotFoundException;
-import com.example.LibraryService.model.Library;
-import com.example.LibraryService.repository.LibraryRepository;
-import com.example.LibraryService.service.LibraryService;
+import com.example.libraryservice.dto.LibraryDTO;
+import com.example.libraryservice.dto.LibraryListDTO;
+import com.example.libraryservice.exception.LibraryNotFoundException;
+import com.example.libraryservice.model.Library;
+import com.example.libraryservice.repository.LibraryRepository;
+import com.example.libraryservice.service.LibraryService;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 import lombok.RequiredArgsConstructor;
@@ -14,7 +14,7 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static com.example.LibraryService.utility.Constant.LIBRARY_NOT_FOUND_BY_ID;
+import static com.example.libraryservice.utility.Constant.LIBRARY_NOT_FOUND_BY_ID;
 
 @RequiredArgsConstructor
 @Service

@@ -1,18 +1,16 @@
-package com.example.AuthenticationService.service;
+package com.example.authenticationservice.service;
 
-import com.example.AuthenticationService.dto.JWTAuthRequest;
-import com.example.AuthenticationService.dto.JWTAuthResponse;
-import com.example.AuthenticationService.dto.UserDTO;
-import com.example.AuthenticationService.exception.UserNotFoundException;
-import com.example.AuthenticationService.exception.WrongPasswordException;
-import com.example.AuthenticationService.model.UserCredential;
-import jakarta.security.auth.message.AuthException;
+import com.example.authenticationservice.dto.JWTAuthRequest;
+import com.example.authenticationservice.dto.JWTAuthResponse;
+import com.example.authenticationservice.dto.UserDTO;
+import com.example.authenticationservice.exception.RegistrationException;
+import com.example.authenticationservice.exception.UserNotFoundException;
+import com.example.authenticationservice.exception.WrongPasswordException;
 import lombok.NonNull;
-import org.apache.catalina.User;
 
 public interface AuthenticationService {
     JWTAuthResponse login(@NonNull JWTAuthRequest authRequest) throws UserNotFoundException, WrongPasswordException;
-    void register(UserDTO userDTO) throws AuthException;
+    UserDTO register(UserDTO userDTO) throws RegistrationException;
 
 
 }

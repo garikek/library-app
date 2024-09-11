@@ -1,16 +1,16 @@
-package com.example.BookService.config;
+package com.example.bookservice.config;
 
-import com.example.BookService.exception.BookNotFoundException;
-import com.example.BookService.exception.DuplicateIsbnException;
-import com.example.BookService.exception.InvalidIsbnException;
+import com.example.bookservice.exception.BookNotFoundException;
+import com.example.bookservice.exception.DuplicateIsbnException;
+import com.example.bookservice.exception.InvalidIsbnException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
-@ControllerAdvice
+@RestControllerAdvice
 public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     @ExceptionHandler(BookNotFoundException.class)
     public ResponseEntity<Object> handleBookNotFoundException(BookNotFoundException ex, WebRequest request) {

@@ -1,4 +1,4 @@
-package com.example.AuthenticationService.model;
+package com.example.authenticationservice.model;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -28,7 +28,7 @@ public class UserCredential {
     private String email;
     @Column(name = "password")
     private String password;
-    @Column(name = "userName")
+    @Column(name = "user_name")
     private String userName;
 
     @Override
