@@ -1,15 +1,15 @@
-package com.example.AuthenticationService.config;
+package com.example.authenticationservice.config;
 
-import com.example.AuthenticationService.exception.UserNotFoundException;
-import com.example.AuthenticationService.exception.WrongPasswordException;
+import com.example.authenticationservice.exception.UserNotFoundException;
+import com.example.authenticationservice.exception.WrongPasswordException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
-@ControllerAdvice
+@RestControllerAdvice
 public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     @ExceptionHandler(UserNotFoundException.class)
     public ResponseEntity<Object> handleUserNotFoundException(UserNotFoundException ex, WebRequest request) {
