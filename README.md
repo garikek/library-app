@@ -55,6 +55,14 @@ mvn clean install
 
 ## 3b. Запуск через docker
 
+Собрать образы
+
+```shell
+docker-compose build
+```
+
+Запустить проект
+
 ```shell
 docker-compose up
 ```
