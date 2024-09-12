@@ -7,7 +7,6 @@ import com.example.libraryservice.service.LibraryService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -36,7 +35,6 @@ public class LibraryController {
     }
 
     @Operation(summary = "Add a new book", description = "Add a new book to the library")
-    @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
     public ResponseEntity<LibraryDTO> addBookToLibrary(@RequestBody LibraryDTO libraryDTO) {
         LibraryDTO createdLibraryDTO = libraryService.addBook(libraryDTO);

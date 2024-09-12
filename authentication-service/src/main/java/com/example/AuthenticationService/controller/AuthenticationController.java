@@ -8,7 +8,6 @@ import com.example.authenticationservice.exception.UserNotFoundException;
 import com.example.authenticationservice.exception.WrongPasswordException;
 import com.example.authenticationservice.service.AuthenticationService;
 import lombok.AllArgsConstructor;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -38,7 +37,6 @@ public class AuthenticationController {
     }
 
     @Operation(summary = "Register", description = "Register a new user")
-    @ResponseStatus(HttpStatus.CREATED)
     @PostMapping("/signup")
     public ResponseEntity<UserDTO> register(@RequestBody UserDTO userDTO) throws RegistrationException {
         UserDTO createdUser = authenticationService.register(userDTO);

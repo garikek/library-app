@@ -31,7 +31,6 @@ public class BookController {
     }
 
     @Operation(summary = "Add a new book", description = "Add a new book to the database")
-    @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
     public ResponseEntity<BookDTO> addBook(@RequestBody BookDTO bookDTO) {
         BookDTO createdBookDTO = bookService.addBook(bookDTO);
