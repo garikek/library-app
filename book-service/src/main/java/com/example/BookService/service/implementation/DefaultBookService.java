@@ -40,13 +40,18 @@ public class DefaultBookService implements BookService {
     }
 
     @Override
-    public BookDTO addBook(BookDTO bookDTO) throws InvalidIsbnException {
+    public BookDTO addBook(BookDTO bookDTO) throws InvalidIsbnException, DuplicateIsbnException {
         log.info("Starting the process of adding a new book: {}", bookDTO);
 
         Book book = modelMapper.map(bookDTO, Book.class);
 
         if (!IsbnValidator.isValidIsbn((book.getIsbn()))) {
             throw new InvalidIsbnException(String.format("Invalid ISBN: %s", book.getIsbn()));
+        }
+
+        Optional<Book> bookWithSameIsbn = bookRepository.findByIsbn(book.getIsbn());
+        if (bookWithSameIsbn.isPresent() && !bookWithSameIsbn.get().getId().equals(book.getId())) {
+            throw new DuplicateIsbnException(String.format("ISBN %s exists already.", book.getIsbn()));
         }
 
         Book savedBook = bookRepository.save(book);
