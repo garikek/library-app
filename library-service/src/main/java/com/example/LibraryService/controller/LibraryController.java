@@ -3,11 +3,10 @@ package com.example.libraryservice.controller;
 import com.example.libraryservice.dto.LibraryDTO;
 import com.example.libraryservice.dto.LibraryListDTO;
 import com.example.libraryservice.exception.LibraryNotFoundException;
-import com.example.libraryservice.service.implementation.DefaultLibraryService;
+import com.example.libraryservice.service.LibraryService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -20,7 +19,7 @@ import java.net.URI;
 @RequestMapping("/api/v1/library")
 @Tag(name = "Library", description = "Endpoints for managing library books")
 public class LibraryController {
-    private final DefaultLibraryService libraryService;
+    private final LibraryService libraryService;
 
     @Operation(summary = "Get free books", description = "Retrieve a list of books that are currently not borrowed")
     @GetMapping("/free")
@@ -36,7 +35,6 @@ public class LibraryController {
     }
 
     @Operation(summary = "Add a new book", description = "Add a new book to the library")
-    @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
     public ResponseEntity<LibraryDTO> addBookToLibrary(@RequestBody LibraryDTO libraryDTO) {
         LibraryDTO createdLibraryDTO = libraryService.addBook(libraryDTO);

@@ -3,7 +3,7 @@ package com.example.bookservice.controller;
 import com.example.bookservice.dto.BookDTO;
 import com.example.bookservice.dto.BookListDTO;
 import com.example.bookservice.exception.BookNotFoundException;
-import com.example.bookservice.service.implementation.DefaultBookService;
+import com.example.bookservice.service.BookService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -22,7 +22,7 @@ import java.net.URI;
 @RequestMapping("/api/v1/books")
 @Tag(name = "Books", description = "Endpoints for managing books")
 public class BookController {
-    private final DefaultBookService bookService;
+    private final BookService bookService;
 
     @Operation(summary = "Get all books", description = "Retrieve a list of all books")
     @GetMapping
@@ -31,7 +31,6 @@ public class BookController {
     }
 
     @Operation(summary = "Add a new book", description = "Add a new book to the database")
-    @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
     public ResponseEntity<BookDTO> addBook(@RequestBody BookDTO bookDTO) {
         BookDTO createdBookDTO = bookService.addBook(bookDTO);
