@@ -18,7 +18,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import java.net.URI;
-import java.time.LocalDate;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -61,8 +60,6 @@ public class DefaultBookService implements BookService {
 
         LibraryDTORequest libraryDTORequest = new LibraryDTORequest();
         libraryDTORequest.setBookId(savedBook.getId());
-        libraryDTORequest.setDateBorrowed(LocalDate.now());
-        libraryDTORequest.setDateToReturn(LocalDate.now().plusDays(14));
 
         try {
             URI location = restTemplate.postForLocation("http://library-service/api/v1/library", libraryDTORequest);
