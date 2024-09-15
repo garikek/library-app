@@ -4,6 +4,7 @@ import com.example.bookservice.dto.BookDTORequest;
 import com.example.bookservice.dto.BookDTOResponse;
 import com.example.bookservice.dto.BookListDTO;
 import com.example.bookservice.service.BookService;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -21,6 +22,7 @@ import java.net.URI;
 @RestController
 @RequestMapping("/api/v1/books")
 @Tag(name = "Books", description = "Endpoints for managing books")
+@SecurityRequirement(name = "Bearer Authentication")
 public class BookController {
     private final BookService bookService;
 

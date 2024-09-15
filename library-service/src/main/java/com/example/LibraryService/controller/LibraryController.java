@@ -4,6 +4,7 @@ import com.example.libraryservice.dto.LibraryDTORequest;
 import com.example.libraryservice.dto.LibraryDTOResponse;
 import com.example.libraryservice.dto.LibraryListDTO;
 import com.example.libraryservice.service.LibraryService;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import lombok.RequiredArgsConstructor;
@@ -18,6 +19,7 @@ import java.net.URI;
 @RestController
 @RequestMapping("/api/v1/library")
 @Tag(name = "Library", description = "Endpoints for managing library books")
+@SecurityRequirement(name = "Bearer Authentication")
 public class LibraryController {
     private final LibraryService libraryService;
 
