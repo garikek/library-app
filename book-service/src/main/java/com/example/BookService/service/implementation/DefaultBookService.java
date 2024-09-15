@@ -97,26 +97,22 @@ public class DefaultBookService implements BookService {
     }
 
     @Override
-    public BookDTOResponse updateBook(Long id, BookDTORequest book) {
-        Book optBook = bookRepository.findById(id)
+    public BookDTOResponse updateBook(Long id, BookDTORequest bookDTORequest) {
+        Book existingBook = bookRepository.findById(id)
                 .orElseThrow(() -> new BookNotFoundException(String.format(BOOK_NOT_FOUND_BY_ID, id)));
 
-        if (!IsbnValidator.isValidIsbn((book.getIsbn()))) {
-            throw new InvalidIsbnException(String.format("Invalid ISBN: %s", book.getIsbn()));
+        if (!IsbnValidator.isValidIsbn((bookDTORequest.getIsbn()))) {
+            throw new InvalidIsbnException(String.format("Invalid ISBN: %s", bookDTORequest.getIsbn()));
         }
 
-        Optional<Book> bookWithSameIsbn = bookRepository.findByIsbn(book.getIsbn());
+        Optional<Book> bookWithSameIsbn = bookRepository.findByIsbn(bookDTORequest.getIsbn());
         if (bookWithSameIsbn.isPresent() && !bookWithSameIsbn.get().getId().equals(id)) {
-            throw new DuplicateIsbnException(String.format("ISBN %s exists already.", book.getIsbn()));
+            throw new DuplicateIsbnException(String.format("ISBN %s exists already.", bookDTORequest.getIsbn()));
         }
 
-        optBook.setAuthor(book.getAuthor());
-        optBook.setTitle(book.getTitle());
-        optBook.setGenre(book.getGenre());
-        optBook.setIsbn(book.getIsbn());
-        optBook.setDescription(book.getDescription());
-        bookRepository.save(optBook);
-        return modelMapper.map(optBook, BookDTOResponse.class);
+        modelMapper.map(bookDTORequest, existingBook);
+        Book updatedBook = bookRepository.save(existingBook);
+        return modelMapper.map(updatedBook, BookDTOResponse.class);
     }
 
 }
