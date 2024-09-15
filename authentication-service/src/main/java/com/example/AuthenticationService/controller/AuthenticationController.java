@@ -2,10 +2,8 @@ package com.example.authenticationservice.controller;
 
 import com.example.authenticationservice.dto.JWTAuthRequest;
 import com.example.authenticationservice.dto.JWTAuthResponse;
-import com.example.authenticationservice.dto.UserDTO;
-import com.example.authenticationservice.exception.RegistrationException;
-import com.example.authenticationservice.exception.UserNotFoundException;
-import com.example.authenticationservice.exception.WrongPasswordException;
+import com.example.authenticationservice.dto.UserDTORequest;
+import com.example.authenticationservice.dto.UserDTOResponse;
 import com.example.authenticationservice.service.AuthenticationService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -32,14 +30,14 @@ public class AuthenticationController {
             @ApiResponse(responseCode = "401", description = "Unauthorized")
     })
     @PostMapping("/login")
-    public ResponseEntity<JWTAuthResponse> login(@RequestBody JWTAuthRequest authRequest) throws UserNotFoundException, WrongPasswordException {
+    public ResponseEntity<JWTAuthResponse> login(@RequestBody JWTAuthRequest authRequest) {
         return ResponseEntity.ok(authenticationService.login(authRequest));
     }
 
     @Operation(summary = "Register", description = "Register a new user")
     @PostMapping("/signup")
-    public ResponseEntity<UserDTO> register(@RequestBody UserDTO userDTO) throws RegistrationException {
-        UserDTO createdUser = authenticationService.register(userDTO);
+    public ResponseEntity<UserDTOResponse> register(@RequestBody UserDTORequest userDTORequest) {
+        UserDTOResponse createdUser = authenticationService.register(userDTORequest);
         URI location = ServletUriComponentsBuilder
                 .fromCurrentRequest()
                 .path("/{id}")

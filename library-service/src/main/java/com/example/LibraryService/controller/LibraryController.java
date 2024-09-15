@@ -1,9 +1,10 @@
 package com.example.libraryservice.controller;
 
-import com.example.libraryservice.dto.LibraryDTO;
+import com.example.libraryservice.dto.LibraryDTORequest;
+import com.example.libraryservice.dto.LibraryDTOResponse;
 import com.example.libraryservice.dto.LibraryListDTO;
-import com.example.libraryservice.exception.LibraryNotFoundException;
 import com.example.libraryservice.service.LibraryService;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import lombok.RequiredArgsConstructor;
@@ -18,6 +19,7 @@ import java.net.URI;
 @RestController
 @RequestMapping("/api/v1/library")
 @Tag(name = "Library", description = "Endpoints for managing library books")
+@SecurityRequirement(name = "Bearer Authentication")
 public class LibraryController {
     private final LibraryService libraryService;
 
@@ -29,20 +31,20 @@ public class LibraryController {
 
     @Operation(summary = "Update a book", description = "Update the details of an existing book in the library")
     @PutMapping("/{id}")
-    public ResponseEntity<LibraryDTO> updateBook(@PathVariable Long id, @RequestBody LibraryDTO libraryDTO) throws LibraryNotFoundException {
-        LibraryDTO updatedLibraryDTO = libraryService.updateBook(id, libraryDTO);
-        return ResponseEntity.ok().body(updatedLibraryDTO);
+    public ResponseEntity<LibraryDTOResponse> updateBook(@PathVariable Long id, @RequestBody LibraryDTORequest libraryDTORequest) {
+        LibraryDTOResponse updatedLibraryDTOResponse = libraryService.updateBook(id, libraryDTORequest);
+        return ResponseEntity.ok().body(updatedLibraryDTOResponse);
     }
 
     @Operation(summary = "Add a new book", description = "Add a new book to the library")
     @PostMapping
-    public ResponseEntity<LibraryDTO> addBookToLibrary(@RequestBody LibraryDTO libraryDTO) {
-        LibraryDTO createdLibraryDTO = libraryService.addBook(libraryDTO);
+    public ResponseEntity<LibraryDTOResponse> addBookToLibrary(@RequestBody LibraryDTORequest libraryDTORequest) {
+        LibraryDTOResponse createdLibraryDTOResponse = libraryService.addBook(libraryDTORequest);
         URI location = ServletUriComponentsBuilder
                 .fromCurrentRequest()
                 .path("/{id}")
-                .buildAndExpand(createdLibraryDTO.getId())
+                .buildAndExpand(createdLibraryDTOResponse.getId())
                 .toUri();
-        return ResponseEntity.created(location).body(createdLibraryDTO);
+        return ResponseEntity.created(location).body(createdLibraryDTOResponse);
     }
 }

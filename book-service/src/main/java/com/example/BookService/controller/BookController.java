@@ -1,9 +1,10 @@
 package com.example.bookservice.controller;
 
-import com.example.bookservice.dto.BookDTO;
+import com.example.bookservice.dto.BookDTORequest;
+import com.example.bookservice.dto.BookDTOResponse;
 import com.example.bookservice.dto.BookListDTO;
-import com.example.bookservice.exception.BookNotFoundException;
 import com.example.bookservice.service.BookService;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -21,6 +22,7 @@ import java.net.URI;
 @RestController
 @RequestMapping("/api/v1/books")
 @Tag(name = "Books", description = "Endpoints for managing books")
+@SecurityRequirement(name = "Bearer Authentication")
 public class BookController {
     private final BookService bookService;
 
@@ -32,8 +34,8 @@ public class BookController {
 
     @Operation(summary = "Add a new book", description = "Add a new book to the database")
     @PostMapping
-    public ResponseEntity<BookDTO> addBook(@RequestBody BookDTO bookDTO) {
-        BookDTO createdBookDTO = bookService.addBook(bookDTO);
+    public ResponseEntity<BookDTOResponse> addBook(@RequestBody BookDTORequest bookDTO) {
+        BookDTOResponse createdBookDTO = bookService.addBook(bookDTO);
         URI location = ServletUriComponentsBuilder
                 .fromCurrentRequest()
                 .path("/{id}")
@@ -48,7 +50,7 @@ public class BookController {
             @ApiResponse(responseCode = "404", description = "Book not found")
     })
     @GetMapping("/isbn/{isbn}")
-    public BookDTO getBookByIsbn(@PathVariable String isbn) throws BookNotFoundException {
+    public BookDTOResponse getBookByIsbn(@PathVariable String isbn) {
         return bookService.getBookByIsbn(isbn);
     }
 
@@ -58,20 +60,20 @@ public class BookController {
             @ApiResponse(responseCode = "404", description = "Book not found")
     })
     @GetMapping("/{id}")
-    public BookDTO getBookById(@PathVariable Long id) throws BookNotFoundException {
+    public BookDTOResponse getBookById(@PathVariable Long id) {
         return bookService.getBookById(id);
     }
 
     @Operation(summary = "Delete a book", description = "Remove a book from the database by its ID")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @DeleteMapping("/{id}")
-    public void deleteBook(@PathVariable Long id) throws BookNotFoundException {
+    public void deleteBook(@PathVariable Long id) {
         bookService.deleteBookById(id);
     }
 
     @Operation(summary = "Update a book by ID", description = "Update the details of an existing book by its ID")
     @PutMapping("/{id}")
-    public ResponseEntity<BookDTO> updateBookById(@PathVariable Long id, @RequestBody BookDTO bookDTO) throws BookNotFoundException {
+    public ResponseEntity<BookDTOResponse> updateBookById(@PathVariable Long id, @RequestBody BookDTORequest bookDTO) {
         return ResponseEntity.ok().body(bookService.updateBook(id, bookDTO));
     }
 }

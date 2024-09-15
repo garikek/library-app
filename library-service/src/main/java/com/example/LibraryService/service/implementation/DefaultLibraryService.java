@@ -1,6 +1,7 @@
 package com.example.libraryservice.service.implementation;
 
-import com.example.libraryservice.dto.LibraryDTO;
+import com.example.libraryservice.dto.LibraryDTORequest;
+import com.example.libraryservice.dto.LibraryDTOResponse;
 import com.example.libraryservice.dto.LibraryListDTO;
 import com.example.libraryservice.exception.LibraryNotFoundException;
 import com.example.libraryservice.model.Library;
@@ -23,28 +24,27 @@ public class DefaultLibraryService implements LibraryService {
     private final ModelMapper modelMapper;
 
     public LibraryListDTO getFreeBooks() {
-        LocalDate today = LocalDate.now();
-        List<Library> freeBooks = libraryRepository.findByDateToReturnBefore(today);
+        List<Library> freeBooks = libraryRepository.findByDateToReturnIsNull();
         return new LibraryListDTO(freeBooks.stream()
-                .map(book -> modelMapper.map(book, LibraryDTO.class))
+                .map(book -> modelMapper.map(book, LibraryDTOResponse.class))
                 .collect(Collectors.toList()));
     }
 
     @Override
-    public LibraryDTO updateBook(Long id, LibraryDTO libraryDTO) throws LibraryNotFoundException {
+    public LibraryDTOResponse updateBook(Long id, LibraryDTORequest libraryDTORequest) {
         Library library = libraryRepository.findById(id)
                 .orElseThrow(() -> new LibraryNotFoundException(String.format(LIBRARY_NOT_FOUND_BY_ID, id)));
-        library.setBookId(libraryDTO.getBookId());
-        library.setDateBorrowed(libraryDTO.getDateBorrowed());
-        library.setDateToReturn(libraryDTO.getDateToReturn());
+        library.setBookId(libraryDTORequest.getBookId());
+        library.setDateBorrowed(libraryDTORequest.getDateBorrowed());
+        library.setDateToReturn(libraryDTORequest.getDateToReturn());
         libraryRepository.save(library);
-        return modelMapper.map(library, LibraryDTO.class);
+        return modelMapper.map(library, LibraryDTOResponse.class);
     }
 
     @Override
-    public LibraryDTO addBook(LibraryDTO libraryDTO) {
-        Library library = modelMapper.map(libraryDTO, Library.class);
+    public LibraryDTOResponse addBook(LibraryDTORequest libraryDTORequest) {
+        Library library = modelMapper.map(libraryDTORequest, Library.class);
         Library savedLibrary = libraryRepository.save(library);
-        return modelMapper.map(savedLibrary, LibraryDTO.class);
+        return modelMapper.map(savedLibrary, LibraryDTOResponse.class);
     }
 }

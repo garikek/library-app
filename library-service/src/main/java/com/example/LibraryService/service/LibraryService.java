@@ -1,13 +1,13 @@
 package com.example.libraryservice.service;
 
-import com.example.libraryservice.dto.LibraryDTO;
+import com.example.libraryservice.dto.LibraryDTORequest;
+import com.example.libraryservice.dto.LibraryDTOResponse;
 import com.example.libraryservice.dto.LibraryListDTO;
-import com.example.libraryservice.exception.LibraryNotFoundException;
 
 public interface LibraryService {
     LibraryListDTO getFreeBooks();
 
-    LibraryDTO updateBook(Long id, LibraryDTO libraryDTO) throws LibraryNotFoundException;
+    LibraryDTOResponse updateBook(Long id, LibraryDTORequest libraryDTORequest);
 
-    LibraryDTO addBook(LibraryDTO libraryDTO);
+    LibraryDTOResponse addBook(LibraryDTORequest libraryDTORequest);
 }
