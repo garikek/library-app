@@ -7,7 +7,7 @@ import com.example.libraryservice.exception.LibraryNotFoundException;
 public interface LibraryService {
     LibraryListDTO getFreeBooks();
 
-    LibraryDTO updateBook(Long id, LibraryDTO libraryDTO) throws LibraryNotFoundException;
+    LibraryDTO updateBook(Long id, LibraryDTO libraryDTO);
 
     LibraryDTO addBook(LibraryDTO libraryDTO);
 }

@@ -31,7 +31,7 @@ public class DefaultLibraryService implements LibraryService {
     }
 
     @Override
-    public LibraryDTO updateBook(Long id, LibraryDTO libraryDTO) throws LibraryNotFoundException {
+    public LibraryDTO updateBook(Long id, LibraryDTO libraryDTO) {
         Library library = libraryRepository.findById(id)
                 .orElseThrow(() -> new LibraryNotFoundException(String.format(LIBRARY_NOT_FOUND_BY_ID, id)));
         library.setBookId(libraryDTO.getBookId());

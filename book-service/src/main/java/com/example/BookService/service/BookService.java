@@ -9,13 +9,13 @@ import com.example.bookservice.exception.InvalidIsbnException;
 public interface BookService {
     BookListDTO getBooks();
 
-    BookDTO addBook(BookDTO bookDTO) throws InvalidIsbnException, DuplicateIsbnException;
+    BookDTO addBook(BookDTO bookDTO);
 
-    BookDTO getBookByIsbn(String isbn) throws BookNotFoundException;
+    BookDTO getBookByIsbn(String isbn);
 
-    BookDTO getBookById(Long id) throws BookNotFoundException;
+    BookDTO getBookById(Long id);
 
-    void deleteBookById(Long id) throws BookNotFoundException;
+    void deleteBookById(Long id);
 
-    BookDTO updateBook(Long id, BookDTO bookDTO) throws BookNotFoundException, DuplicateIsbnException, InvalidIsbnException;
+    BookDTO updateBook(Long id, BookDTO bookDTO);
 }

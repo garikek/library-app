@@ -40,12 +40,12 @@ public class DefaultBookService implements BookService {
     }
 
     @Override
-    public BookDTO addBook(BookDTO bookDTO) throws InvalidIsbnException, DuplicateIsbnException {
+    public BookDTO addBook(BookDTO bookDTO) {
         log.info("Starting the process of adding a new book: {}", bookDTO);
 
         Book book = modelMapper.map(bookDTO, Book.class);
 
-        if (!IsbnValidator.isValidIsbn((book.getIsbn()))) {
+        if (!IsbnValidator.isValidIsbn(book.getIsbn())) {
             throw new InvalidIsbnException(String.format("Invalid ISBN: %s", book.getIsbn()));
         }
 
@@ -74,21 +74,21 @@ public class DefaultBookService implements BookService {
     }
 
     @Override
-    public BookDTO getBookByIsbn(String isbn) throws BookNotFoundException {
+    public BookDTO getBookByIsbn(String isbn) {
         Book optBook = bookRepository.findByIsbn(isbn)
                 .orElseThrow(() -> new BookNotFoundException(String.format(BOOK_NOT_FOUND_BY_ISBN, isbn)));
         return modelMapper.map(optBook, BookDTO.class);
     }
 
     @Override
-    public BookDTO getBookById(Long id) throws BookNotFoundException {
+    public BookDTO getBookById(Long id) {
         Book book = bookRepository.findById(id)
                 .orElseThrow(() -> new BookNotFoundException(String.format(BOOK_NOT_FOUND_BY_ID, id)));
         return modelMapper.map(book, BookDTO.class);
     }
 
     @Override
-    public void deleteBookById(Long id) throws BookNotFoundException {
+    public void deleteBookById(Long id) {
         if(!bookRepository.existsById(id)) {
             throw new BookNotFoundException(String.format(BOOK_NOT_FOUND_BY_ID, id));
         }
@@ -96,7 +96,7 @@ public class DefaultBookService implements BookService {
     }
 
     @Override
-    public BookDTO updateBook(Long id, BookDTO book) throws BookNotFoundException, DuplicateIsbnException, InvalidIsbnException {
+    public BookDTO updateBook(Long id, BookDTO book) {
         Book optBook = bookRepository.findById(id)
                 .orElseThrow(() -> new BookNotFoundException(String.format(BOOK_NOT_FOUND_BY_ID, id)));
 

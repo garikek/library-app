@@ -48,7 +48,7 @@ public class BookController {
             @ApiResponse(responseCode = "404", description = "Book not found")
     })
     @GetMapping("/isbn/{isbn}")
-    public BookDTO getBookByIsbn(@PathVariable String isbn) throws BookNotFoundException {
+    public BookDTO getBookByIsbn(@PathVariable String isbn) {
         return bookService.getBookByIsbn(isbn);
     }
 
@@ -58,20 +58,20 @@ public class BookController {
             @ApiResponse(responseCode = "404", description = "Book not found")
     })
     @GetMapping("/{id}")
-    public BookDTO getBookById(@PathVariable Long id) throws BookNotFoundException {
+    public BookDTO getBookById(@PathVariable Long id) {
         return bookService.getBookById(id);
     }
 
     @Operation(summary = "Delete a book", description = "Remove a book from the database by its ID")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @DeleteMapping("/{id}")
-    public void deleteBook(@PathVariable Long id) throws BookNotFoundException {
+    public void deleteBook(@PathVariable Long id) {
         bookService.deleteBookById(id);
     }
 
     @Operation(summary = "Update a book by ID", description = "Update the details of an existing book by its ID")
     @PutMapping("/{id}")
-    public ResponseEntity<BookDTO> updateBookById(@PathVariable Long id, @RequestBody BookDTO bookDTO) throws BookNotFoundException {
+    public ResponseEntity<BookDTO> updateBookById(@PathVariable Long id, @RequestBody BookDTO bookDTO) {
         return ResponseEntity.ok().body(bookService.updateBook(id, bookDTO));
     }
 }

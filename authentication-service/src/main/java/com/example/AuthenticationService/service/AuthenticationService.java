@@ -9,8 +9,8 @@ import com.example.authenticationservice.exception.WrongPasswordException;
 import lombok.NonNull;
 
 public interface AuthenticationService {
-    JWTAuthResponse login(@NonNull JWTAuthRequest authRequest) throws UserNotFoundException, WrongPasswordException;
-    UserDTO register(UserDTO userDTO) throws RegistrationException;
+    JWTAuthResponse login(@NonNull JWTAuthRequest authRequest);
+    UserDTO register(UserDTO userDTO);
 
 
 }

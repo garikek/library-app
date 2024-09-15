@@ -29,7 +29,7 @@ public class DefaultAuthenticationService implements AuthenticationService {
     private final ModelMapper modelMapper;
     private final PasswordEncoder passwordEncoder;
 
-    public JWTAuthResponse login(@NonNull JWTAuthRequest authRequest) throws UserNotFoundException, WrongPasswordException {
+    public JWTAuthResponse login(@NonNull JWTAuthRequest authRequest) {
         UserCredential user = userRepository.findByEmail(authRequest.getEmail())
                 .orElseThrow(() -> new UserNotFoundException("User not found by EMAIL"));
         if (passwordEncoder.matches(authRequest.getPassword(), user.getPassword())) {
@@ -43,7 +43,7 @@ public class DefaultAuthenticationService implements AuthenticationService {
     }
 
     @Override
-    public UserDTO register(UserDTO userDTO) throws RegistrationException {
+    public UserDTO register(UserDTO userDTO) {
         if ( !userRepository.existsUserByEmail(userDTO.getEmail())) {
             userDTO.setPassword(passwordEncoder.encode(userDTO.getPassword()));
             UserCredential user = modelMapper.map(userDTO, UserCredential.class);

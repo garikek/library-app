@@ -29,7 +29,7 @@ public class LibraryController {
 
     @Operation(summary = "Update a book", description = "Update the details of an existing book in the library")
     @PutMapping("/{id}")
-    public ResponseEntity<LibraryDTO> updateBook(@PathVariable Long id, @RequestBody LibraryDTO libraryDTO) throws LibraryNotFoundException {
+    public ResponseEntity<LibraryDTO> updateBook(@PathVariable Long id, @RequestBody LibraryDTO libraryDTO) {
         LibraryDTO updatedLibraryDTO = libraryService.updateBook(id, libraryDTO);
         return ResponseEntity.ok().body(updatedLibraryDTO);
     }

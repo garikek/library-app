@@ -32,13 +32,13 @@ public class AuthenticationController {
             @ApiResponse(responseCode = "401", description = "Unauthorized")
     })
     @PostMapping("/login")
-    public ResponseEntity<JWTAuthResponse> login(@RequestBody JWTAuthRequest authRequest) throws UserNotFoundException, WrongPasswordException {
+    public ResponseEntity<JWTAuthResponse> login(@RequestBody JWTAuthRequest authRequest) {
         return ResponseEntity.ok(authenticationService.login(authRequest));
     }
 
     @Operation(summary = "Register", description = "Register a new user")
     @PostMapping("/signup")
-    public ResponseEntity<UserDTO> register(@RequestBody UserDTO userDTO) throws RegistrationException {
+    public ResponseEntity<UserDTO> register(@RequestBody UserDTO userDTO) {
         UserDTO createdUser = authenticationService.register(userDTO);
         URI location = ServletUriComponentsBuilder
                 .fromCurrentRequest()
