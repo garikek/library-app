@@ -24,8 +24,7 @@ public class DefaultLibraryService implements LibraryService {
     private final ModelMapper modelMapper;
 
     public LibraryListDTO getFreeBooks() {
-        LocalDate today = LocalDate.now();
-        List<Library> freeBooks = libraryRepository.findByDateToReturnBefore(today);
+        List<Library> freeBooks = libraryRepository.findByDateToReturnIsNull();
         return new LibraryListDTO(freeBooks.stream()
                 .map(book -> modelMapper.map(book, LibraryDTOResponse.class))
                 .collect(Collectors.toList()));
