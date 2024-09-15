@@ -1,21 +1,19 @@
 package com.example.bookservice.service;
 
-import com.example.bookservice.dto.BookDTO;
+import com.example.bookservice.dto.BookDTORequest;
+import com.example.bookservice.dto.BookDTOResponse;
 import com.example.bookservice.dto.BookListDTO;
-import com.example.bookservice.exception.BookNotFoundException;
-import com.example.bookservice.exception.DuplicateIsbnException;
-import com.example.bookservice.exception.InvalidIsbnException;
 
 public interface BookService {
     BookListDTO getBooks();
 
-    BookDTO addBook(BookDTO bookDTO);
+    BookDTOResponse addBook(BookDTORequest bookDTO);
 
-    BookDTO getBookByIsbn(String isbn);
+    BookDTOResponse getBookByIsbn(String isbn);
 
-    BookDTO getBookById(Long id);
+    BookDTOResponse getBookById(Long id);
 
     void deleteBookById(Long id);
 
-    BookDTO updateBook(Long id, BookDTO bookDTO);
+    BookDTOResponse updateBook(Long id, BookDTORequest bookDTO);
 }

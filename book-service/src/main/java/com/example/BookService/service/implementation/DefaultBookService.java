@@ -1,8 +1,9 @@
 package com.example.bookservice.service.implementation;
 
-import com.example.bookservice.dto.BookDTO;
+import com.example.bookservice.dto.BookDTORequest;
+import com.example.bookservice.dto.BookDTOResponse;
 import com.example.bookservice.dto.BookListDTO;
-import com.example.bookservice.dto.LibraryDTO;
+import com.example.bookservice.dto.LibraryDTORequest;
 import com.example.bookservice.exception.DuplicateIsbnException;
 import com.example.bookservice.exception.InvalidIsbnException;
 import com.example.bookservice.model.Book;
@@ -35,15 +36,15 @@ public class DefaultBookService implements BookService {
     @Override
     public BookListDTO getBooks() {
         return new BookListDTO(bookRepository.findAll().stream()
-                .map((book) -> modelMapper.map(book, BookDTO.class))
+                .map((book) -> modelMapper.map(book, BookDTOResponse.class))
                 .collect(Collectors.toList()));
     }
 
     @Override
-    public BookDTO addBook(BookDTO bookDTO) {
-        log.info("Starting the process of adding a new book: {}", bookDTO);
+    public BookDTOResponse addBook(BookDTORequest bookDTORequest) {
+        log.info("Starting the process of adding a new book: {}", bookDTORequest);
 
-        Book book = modelMapper.map(bookDTO, Book.class);
+        Book book = modelMapper.map(bookDTORequest, Book.class);
 
         if (!IsbnValidator.isValidIsbn(book.getIsbn())) {
             throw new InvalidIsbnException(String.format("Invalid ISBN: %s", book.getIsbn()));
@@ -58,33 +59,33 @@ public class DefaultBookService implements BookService {
 
         log.info("Book saved in the database with ID: {}", savedBook.getId());
 
-        LibraryDTO libraryDTO = new LibraryDTO();
-        libraryDTO.setBookId(savedBook.getId());
-        libraryDTO.setDateBorrowed(LocalDate.now());
-        libraryDTO.setDateToReturn(LocalDate.now().plusDays(14));
+        LibraryDTORequest libraryDTORequest = new LibraryDTORequest();
+        libraryDTORequest.setBookId(savedBook.getId());
+        libraryDTORequest.setDateBorrowed(LocalDate.now());
+        libraryDTORequest.setDateToReturn(LocalDate.now().plusDays(14));
 
         try {
-            URI location = restTemplate.postForLocation("http://library-service/api/v1/library", libraryDTO);
+            URI location = restTemplate.postForLocation("http://library-service/api/v1/library", libraryDTORequest);
             log.info("Book successfully sent to LibraryService, location: {}", location);
         } catch (Exception e) {
             log.error("Failed to send book to LibraryService. Error: {}", e.getMessage());
         }
 
-        return modelMapper.map(savedBook, BookDTO.class);
+        return modelMapper.map(savedBook, BookDTOResponse.class);
     }
 
     @Override
-    public BookDTO getBookByIsbn(String isbn) {
+    public BookDTOResponse getBookByIsbn(String isbn) {
         Book optBook = bookRepository.findByIsbn(isbn)
                 .orElseThrow(() -> new BookNotFoundException(String.format(BOOK_NOT_FOUND_BY_ISBN, isbn)));
-        return modelMapper.map(optBook, BookDTO.class);
+        return modelMapper.map(optBook, BookDTOResponse.class);
     }
 
     @Override
-    public BookDTO getBookById(Long id) {
+    public BookDTOResponse getBookById(Long id) {
         Book book = bookRepository.findById(id)
                 .orElseThrow(() -> new BookNotFoundException(String.format(BOOK_NOT_FOUND_BY_ID, id)));
-        return modelMapper.map(book, BookDTO.class);
+        return modelMapper.map(book, BookDTOResponse.class);
     }
 
     @Override
@@ -96,7 +97,7 @@ public class DefaultBookService implements BookService {
     }
 
     @Override
-    public BookDTO updateBook(Long id, BookDTO book) {
+    public BookDTOResponse updateBook(Long id, BookDTORequest book) {
         Book optBook = bookRepository.findById(id)
                 .orElseThrow(() -> new BookNotFoundException(String.format(BOOK_NOT_FOUND_BY_ID, id)));
 
@@ -115,7 +116,7 @@ public class DefaultBookService implements BookService {
         optBook.setIsbn(book.getIsbn());
         optBook.setDescription(book.getDescription());
         bookRepository.save(optBook);
-        return modelMapper.map(optBook, BookDTO.class);
+        return modelMapper.map(optBook, BookDTOResponse.class);
     }
 
 }

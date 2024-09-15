@@ -2,7 +2,8 @@ package com.example.authenticationservice.service.implementation;
 
 import com.example.authenticationservice.dto.JWTAuthRequest;
 import com.example.authenticationservice.dto.JWTAuthResponse;
-import com.example.authenticationservice.dto.UserDTO;
+import com.example.authenticationservice.dto.UserDTORequest;
+import com.example.authenticationservice.dto.UserDTOResponse;
 import com.example.authenticationservice.exception.RegistrationException;
 import com.example.authenticationservice.exception.UserNotFoundException;
 import com.example.authenticationservice.exception.WrongPasswordException;
@@ -43,12 +44,12 @@ public class DefaultAuthenticationService implements AuthenticationService {
     }
 
     @Override
-    public UserDTO register(UserDTO userDTO) {
-        if ( !userRepository.existsUserByEmail(userDTO.getEmail())) {
-            userDTO.setPassword(passwordEncoder.encode(userDTO.getPassword()));
-            UserCredential user = modelMapper.map(userDTO, UserCredential.class);
+    public UserDTOResponse register(UserDTORequest userDTORequest) {
+        if ( !userRepository.existsUserByEmail(userDTORequest.getEmail())) {
+            userDTORequest.setPassword(passwordEncoder.encode(userDTORequest.getPassword()));
+            UserCredential user = modelMapper.map(userDTORequest, UserCredential.class);
             UserCredential savedUser = userRepository.save(user);
-            return modelMapper.map(savedUser, UserDTO.class);
+            return modelMapper.map(savedUser, UserDTOResponse.class);
         } else {
             throw new RegistrationException("User already exists");
         }

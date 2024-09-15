@@ -8,5 +8,5 @@ import java.util.List;
 @AllArgsConstructor
 @Data
 public class BookListDTO {
-    private List<BookDTO> bookDTOList;
+    private List<BookDTOResponse> bookDTOList;
 }
